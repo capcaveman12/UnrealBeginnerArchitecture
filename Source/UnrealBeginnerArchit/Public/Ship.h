@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Ship.generated.h"
 
 UCLASS()
@@ -15,15 +16,27 @@ public:
 	// Sets default values for this pawn's properties
 	AShip();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ship | Movement")
+	float ImpulseStrength = 10.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ship | Movement")
+	float TorqueStrength = 10.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ship | Graphics")
+	UStaticMeshComponent* ShipMesh;
+
+private:
+	
+	USpringArmComponent* CameraBoom;
 
 };
