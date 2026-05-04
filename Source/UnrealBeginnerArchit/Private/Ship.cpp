@@ -15,6 +15,11 @@ AShip::AShip()
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(ShipMesh);
 
+	CameraBoom->TargetArmLength = 1000.f;
+
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	Camera->SetupAttachment(CameraBoom);
+
 }
 
 // Called when the game starts or when spawned
@@ -38,6 +43,11 @@ void AShip::Tick(float DeltaTime)
 void AShip::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		//Bind actions to a function
+	}
 
 }
 

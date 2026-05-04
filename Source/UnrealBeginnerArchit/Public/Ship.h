@@ -5,7 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 #include "Ship.generated.h"
+
+class UInputMappingContext;
+class UInputAction;
 
 UCLASS()
 class UNREALBEGINNERARCHIT_API AShip : public APawn
@@ -35,8 +39,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ship | Graphics")
 	UStaticMeshComponent* ShipMesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ship | Inputs")
+	UInputMappingContext* ShipMappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ship | Inputs")
+	UInputAction* PropelUp;
+
 private:
-	
+	UPROPERTY(EditDefaultsOnly)
 	USpringArmComponent* CameraBoom;
+
+	UPROPERTY(EditDefaultsOnly)
+	UCameraComponent* Camera;
 
 };
